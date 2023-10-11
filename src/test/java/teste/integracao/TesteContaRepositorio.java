@@ -1,5 +1,6 @@
 package teste.integracao;
 
+import br.com.conta.sistema.dominio.modelo.NegocioException;
 import br.com.conta.sistema.porta.ContaRepositorio;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 @DisplayName("Serviço de banco de dados - Conta")
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = Config.class)
@@ -17,8 +21,13 @@ public class TesteContaRepositorio {
     ContaRepositorio repositorio;
 
     @Test
-    @DisplayName("teste")
+    @DisplayName("pesquisa conta com número nulo")
     void teste1() {
-        System.out.println("oi");
+        try {
+            var conta = repositorio.get(null);
+            assertTrue(conta == null, "Conta deve ser nula");
+        } catch (NegocioException e) {
+            fail("Deve carregar uma conta nula.");
+        }
     }
 }
