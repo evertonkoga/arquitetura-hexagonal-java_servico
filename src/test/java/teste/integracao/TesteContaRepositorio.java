@@ -40,4 +40,15 @@ public class TesteContaRepositorio {
             fail("Deve carregar uma conta nula.");
         }
     }
+    @Test
+    @DisplayName("pesquisa conta com número existente")
+    void teste3() {
+        try {
+            var conta = repositorio.get(50);
+            assertTrue(conta != null, "Conta deve estar preenchida");
+            System.out.println(conta);
+        } catch (NegocioException e) {
+            fail("Deve carregar uma conta.");
+        }
+    }
 }
