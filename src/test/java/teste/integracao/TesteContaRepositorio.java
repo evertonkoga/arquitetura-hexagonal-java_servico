@@ -10,6 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -62,5 +64,22 @@ public class TesteContaRepositorio {
             System.out.println(e.getMessage());
         }
     }
+    @Test
+    @DisplayName("alterar conta com sucesso")
+    void teste5() {
+        try {
+            var contaAtual = repositorio.get(50);
+            contaAtual.setSaldo(new BigDecimal("1.00"));
+            contaAtual.setCorrentista("Alterado");
 
+            repositorio.alterar(contaAtual);
+
+            var contaAlterada = repositorio.get(50);
+
+            assertEquals(contaAtual.getSaldo(), contaAlterada.getSaldo(), "Deve bater o saldo");
+            assertEquals(contaAtual.getCorrentista(), contaAlterada.getCorrentista(), "Deve bater o correntista");
+        } catch (NegocioException e) {
+            fail("Deve alterar conta ");
+        }
+    }
 }
