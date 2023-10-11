@@ -30,4 +30,14 @@ public class TesteContaRepositorio {
             fail("Deve carregar uma conta nula.");
         }
     }
+    @Test
+    @DisplayName("pesquisa conta com número inexistente")
+    void teste2() {
+        try {
+            var conta = repositorio.get(8547);
+            assertTrue(conta == null, "Conta deve ser nula");
+        } catch (NegocioException e) {
+            fail("Deve carregar uma conta nula.");
+        }
+    }
 }
