@@ -10,7 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @DisplayName("Serviço de banco de dados - Conta")
@@ -51,4 +51,16 @@ public class TesteContaRepositorio {
             fail("Deve carregar uma conta.");
         }
     }
+    @Test
+    @DisplayName("alterar conta como nulo")
+    void teste4() {
+        try {
+            repositorio.alterar(null);
+            fail("Não deve alterar conta nula");
+        } catch (NegocioException e) {
+            assertEquals(e.getMessage(), "Conta é obrigatório.");
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
