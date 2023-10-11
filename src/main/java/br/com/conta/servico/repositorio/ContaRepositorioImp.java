@@ -1,4 +1,4 @@
-package br.com.conta.sevico.repositorio;
+package br.com.conta.servico.repositorio;
 
 import br.com.conta.sistema.dominio.modelo.Conta;
 import br.com.conta.sistema.dominio.modelo.NegocioException;
